@@ -1,6 +1,7 @@
 from sqlalchemy import select
 from models import User
 from user.schemes import UserCreate
+from utils import hash_password
 from sqlalchemy.ext.asyncio import AsyncSession
 
 class UserRepository:
@@ -9,7 +10,11 @@ class UserRepository:
                           session: AsyncSession,
                           user: UserCreate) -> User:
         async with session.begin():
-            new_user = User(**user.model_dump())
+            user_data = user.model_dump()
+            print(user_data)
+            new_user = User(name=user_data['name'],
+                            email=user_data['email'],
+                            password=hash_password(user_data['password']))
             session.add(new_user)
         await session.commit()
         await session.refresh(new_user)
