@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, String
+from sqlalchemy import Column, Integer, String, String, JSON
 from db import Base
 
 
@@ -11,6 +11,7 @@ class User(Base):
 class EventBase(Base):
     __tablename__ = "events"
     id = Column(Integer, primary_key=True)
+    title = Column(String, index=True)
     type = Column(String, index=True)
     block = Column(String, nullable=True, index=True)
     emergency_block = Column(String, nullable=True, index=True)
