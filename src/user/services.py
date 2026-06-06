@@ -29,6 +29,13 @@ class UserRepository:
         return result.scalars().first()
     
     @classmethod
+    async def get_user_by_username(cls,
+                                   session: AsyncSession,
+                                   username: str) -> User | None:
+        result = await session.execute(select(User).where(User.name == username))
+        return result.scalars().first()
+    
+    @classmethod
     async def delete_user(cls,
                               session: AsyncSession,
                               user_id: int) -> bool:
