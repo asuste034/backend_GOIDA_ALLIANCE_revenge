@@ -2,7 +2,6 @@ from typing import Optional
 from pydantic import BaseModel, Json
 
 class Event(BaseModel):
-    id : int
     title: str
     type : str
     block : Optional[str]
