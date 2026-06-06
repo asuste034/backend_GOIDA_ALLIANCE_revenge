@@ -10,8 +10,8 @@ async def create_event(db: AsyncSession, event: Event):
     db.add(db_event)
     await db.flush()
     await db.commit()
-    await db.refresh(event)
-    return event
+    await db.refresh(db_event)
+    return db_event
 
 async def delete_event(db: AsyncSession, id: int):
     db_item = await get_event_by_id(db, id)
@@ -33,8 +33,8 @@ async def update_event(db: AsyncSession, id : int, updates: Event):
 
 async def get_event_by_id(db: AsyncSession, id : int):
     result = await db.execute(
-        select(Event).where(
-            Event.id == id
+        select(EventBase).where(
+            EventBase.id == id
         )
     )
     return result.scalar_one_or_none()
