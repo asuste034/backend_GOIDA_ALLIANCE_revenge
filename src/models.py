@@ -11,7 +11,7 @@ class User(Base):
 
 class EventBase(Base):
     __tablename__ = "events"
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, index=True)
     title = Column(String, index=True)
     type = Column(String, index=True)
     block = Column(String, nullable=True, index=True)
