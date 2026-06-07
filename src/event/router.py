@@ -4,7 +4,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from db import get_db
 from event import services
 from event.schemes import EventResponse, Event
-from models import EventBase
 
 event_router = APIRouter(prefix="/events", tags=["events"])
 
