@@ -13,7 +13,7 @@ async def create_event(event: Event, db: AsyncSession = Depends(get_db)):
 
 @event_router.get('/get', response_model=list[EventResponse])
 async def get_events(db: AsyncSession = Depends(get_db)):
-    return services.get_events(db)
+    return await services.get_events(db)
 
 @event_router.put('/update/{event_id}', response_model=EventResponse)
 async def update_event(event_id: int, updates: Event, db : AsyncSession = Depends(get_db)):

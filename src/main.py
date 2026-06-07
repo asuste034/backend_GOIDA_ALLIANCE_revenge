@@ -1,6 +1,15 @@
+import asyncio
+
 from fastapi import FastAPI
+from fastapi.concurrency import asynccontextmanager
+from db import init_models
 
 app = FastAPI(title='Сервер')
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await init_models() 
+    yield
 
 from user.router import user_router
 from auth.router import auth_router
